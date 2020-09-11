@@ -11,15 +11,16 @@ all responses will be in the form:
 }
 ```
 ### List All Messages
-**Defination**
+**Definations**
 
 `GET api/v1/listMessages`
 `POST api/v1/createMessage`
 `Delete api/v1/message`
 
-**Response**
-
+**Responses**
  - `200 OK` on success
+ - `404 Not Found` no such a message or url
+ - `204 No content` no data returned
 
 ```json
 {
