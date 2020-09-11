@@ -13,9 +13,11 @@ all responses will be in the form:
 ### List All Messages
 **Definations**
 
-`GET api/v1/listMessages`
-`POST api/v1/createMessage`
-`Delete api/v1/message`
+- `GET api/v1/listMessages`
+
+- `POST api/v1/createMessage`
+
+- `Delete api/v1/message`
 
 **Responses**
  - `200 OK` on success
