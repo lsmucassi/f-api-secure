@@ -23,7 +23,7 @@ def get_message(request, sender):
     """
     if request.method == 'GET':
         try:
-            message = Message.objects.get(sender=sender)
+            message = Message.objects.get(sender=sender) #get the object with matching sender
             response = json.dumps([{
                 'title:': message.title,
                 'content': message.content,
@@ -44,7 +44,6 @@ def list_all(request, format=None):
             try:
                 messages = Message.objects.all().values()  # or simply .values() to get all fields
                 response = list(messages)  # important: convert the QuerySet to a list object
-                # return JsonResponse(message_list, safe=False)
             except:
                 response = json.dumps([{'Error: [404] - Message does not exist'}])
     return JsonResponse(response, safe=False)
@@ -52,7 +51,7 @@ def list_all(request, format=None):
 @csrf_exempt
 def add_message(request):
     """
-    creates a message template/payload with attributes:
+    sends a message template/payload with attributes:
         {
             title : title of the message
             content : Body oir content of the message
