@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
 # from rest_framework.response import Response
 
 import json
@@ -29,33 +31,16 @@ def list_all(request, format=None):
     """
         Return a list of all users.
     """
-    response = []
+    response = list()
     if request.method == 'GET':
-        # messages = Message.objects.get(sender='sender')
-        for message in Message.objects.all():
-            response.append(json.dumps([{
-                'title:': message.title,
-                'content': message.content,
-                'sender': message.sender,
-                'url': message.url
-            }]))
-            # print(response)
-            
-        # print(messages, "This is what I am")
-        # return Response(messages)
-    return HttpResponse(response, content_type='text/json')
         
-        #     try:
-        #         message = Message.objects.get(sender=sender)
-        #         response = json.dumps([{
-        #             'title:': message.title,
-        #             'content': message.content,
-        #             'sender': message.sender,
-        #             'url': message.url
-        #         }])
-        #     except:
-        #         response = json.dumps([{'Error: [404] - Message does not exist'}])
-        # return HttpResponse(response, content_type='text/json')
+            try:
+                messages = Message.objects.all().values()  # or simply .values() to get all fields
+                response = list(messages)  # important: convert the QuerySet to a list object
+                # return JsonResponse(message_list, safe=False)
+            except:
+                response = json.dumps([{'Error: [404] - Message does not exist'}])
+    return JsonResponse(response, safe=False)
 
 @csrf_exempt
 def add_message(request):
