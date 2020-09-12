@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+# from rest_framework.response import Response
 
 import json
 from message_board.models import Message
@@ -24,19 +25,37 @@ def get_message(request, sender):
             response = json.dumps([{'Error: [404] - Message does not exist'}])
     return HttpResponse(response, content_type='text/json')
 
-def list_all(request, sender):
-        if request.method == 'GET':
-            try:
-                message = Message.objects.get(sender=sender)
-                response = json.dumps([{
-                    'title:': message.title,
-                    'content': message.content,
-                    'sender': message.sender,
-                    'url': message.url
-                }])
-            except:
-                response = json.dumps([{'Error: [404] - Message does not exist'}])
-        return HttpResponse(response, content_type='text/json')
+def list_all(request, format=None):
+    """
+        Return a list of all users.
+    """
+    response = []
+    if request.method == 'GET':
+        # messages = Message.objects.get(sender='sender')
+        for message in Message.objects.all():
+            response.append(json.dumps([{
+                'title:': message.title,
+                'content': message.content,
+                'sender': message.sender,
+                'url': message.url
+            }]))
+            # print(response)
+            
+        # print(messages, "This is what I am")
+        # return Response(messages)
+    return HttpResponse(response, content_type='text/json')
+        
+        #     try:
+        #         message = Message.objects.get(sender=sender)
+        #         response = json.dumps([{
+        #             'title:': message.title,
+        #             'content': message.content,
+        #             'sender': message.sender,
+        #             'url': message.url
+        #         }])
+        #     except:
+        #         response = json.dumps([{'Error: [404] - Message does not exist'}])
+        # return HttpResponse(response, content_type='text/json')
 
 @csrf_exempt
 def add_message(request):
