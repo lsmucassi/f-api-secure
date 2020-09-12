@@ -69,15 +69,15 @@ $> python manage.py runserver
 - [x] create an app inside django project
 - [x] config setting and & urls
 - [x] create a message model
-- [x] link model to mysql - using makemigrations andmigrate
+- [x] link model to mysql - using makemigrations and migrate
 - [x] create a message model
 - [x] create endpoint services
 - [x] create api/v1/createMessage
 - [x] create api/v1/listMessages
 - [ ] create api/v1/getMessage/<str:sender>
 - [ ] create api/v1/deleteMessage/<str:sender>
-- [ ] create api/v1/createMessage
-- [ ] create api/v1/listMessages
-- [ ] create api/v1/getMessage/<str:sender>
-- [ ] create api/v1/deleteMessage/<str:sender>
+- [ ] create api/v2/createMessage
+- [ ] create api/v2/listMessages
+- [ ] create api/v2/getMessage/<str:sender>
+- [ ] create api/v2/deleteMessage/<str:sender>
 

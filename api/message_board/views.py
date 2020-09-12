@@ -36,7 +36,7 @@ def get_message(request, sender):
 
 def list_all(request, format=None):
     """
-        Return a list of all users.
+        Return a list of all messages registered on the db
     """
     response = list()
     if request.method == 'GET':
@@ -51,6 +51,15 @@ def list_all(request, format=None):
 
 @csrf_exempt
 def add_message(request):
+    """
+    creates a message template/payload with attributes:
+        {
+            title : title of the message
+            content : Body oir content of the message
+            sender : the sender of the message
+            url = a valid url
+        }
+    """
     if request.method == 'POST':
         payload = json.loads(request.body)
         title = payload['title']
