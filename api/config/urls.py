@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from message_board import views
 
 urlpatterns = [
+    path('', views.index),
+    path('api/v1/createMessage', views.add_message),
+    path('api/v1/listMessages', views.list_all),
+    path('api/v1/<str:sender>', view.get_message),
     path('admin/', admin.site.urls),
 ]
