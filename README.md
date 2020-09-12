@@ -15,18 +15,22 @@ and listMessages. The services should be implemented using a protocol (of your c
 > 2. ListMessages service lists all the messages persisted in the application. The service should support two response versions within the same endpoint. The caller is able to define which response version he can handle.
 
 ### Requirements
- ```  python
-      django
-      django rest framework
+``` 
+python
+django
+django rest framework
 ```
 
 ### Setup
 - Clone project to your desired destination 
-- cd to project 
+- cd to cloned project
+- create virtual env & activate env (optional)
+- cd to main project (to directory with manage.py)
 - migrate & runserver
 - start sending queries 
 ```
 cd f-api-secure
+cd api
 
 ```
 
