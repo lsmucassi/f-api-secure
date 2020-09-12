@@ -71,8 +71,13 @@ $> python manage.py runserver
 - [x] create a message model
 - [x] link model to mysql - using makemigrations andmigrate
 - [x] create a message model
+- [x] create endpoint services
 - [x] create api/v1/createMessage
 - [x] create api/v1/listMessages
-- [x] create api/v1/getMessage/<str:sender>
+- [ ] create api/v1/getMessage/<str:sender>
 - [ ] create api/v1/deleteMessage/<str:sender>
-- [x] create endpoint services
+- [ ] create api/v1/createMessage
+- [ ] create api/v1/listMessages
+- [ ] create api/v1/getMessage/<str:sender>
+- [ ] create api/v1/deleteMessage/<str:sender>
+

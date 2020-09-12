@@ -3,17 +3,24 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
-# from rest_framework.response import Response
-
 import json
 from message_board.models import Message
 
-# Create your views here.
 def index(request):
+    """
+    landing endpoint with empty response: can be later 
+    used for informing a user about the API.
+    you land here if there is no endpoint registered
+    i.e locahost:8000 ---> return [{}]
+    """
     response = json.dumps([{}])
     return HttpResponse(response, content_type='text/json')
 
 def get_message(request, sender):
+    """
+    using the provided sender attribute/value,
+    return a meassage or messages with the sender
+    """
     if request.method == 'GET':
         try:
             message = Message.objects.get(sender=sender)
