@@ -22,124 +22,37 @@ django rest framework
 - cd to cloned project
 - create virtual env & activate env (optional)
 - cd to main project (to directory with manage.py)
+- make migrations
 - migrate & runserver
 - start sending queries 
 ```
-cd f-api-secure
-cd api
-
+$> cd f-api-secure
+$> python -m venv env
+$> source env/bin/activate
+$> cd api
+$> python manage.py makemigrations
+$> python manage.py migrate
+$> python manage.py runserver
 ```
-
-### Overview Project Structure
-```
-.
-│   bower.json
-|   CHANGELOG.md
-|   gulpfile.js
-|   jsconfig.json
-|   LICENSE.md
-|   package.json
-|   package-lock.json
-|
-└───public
-│   │   favicon.ico
-│   │   index.html
-|
-|   README.md
-|
-└───src
-│   └─── assets
-|   │       └─── css
-|   │       └─── demo
-|   │       └─── fonts
-|   │       └─── img
-|   │       └─── fonts
-|   │       └─── jss
-|   │       └─── scss
-│   │
-│   └─── components
-|   │       └─── Badge
-|   │       └─── Card
-|   │       └─── Clearfix
-|   │       └─── CustomButtons
-|   │       └─── CustomDropdown
-|   │       └─── CustomInput
-|   │       └─── CustomLinearProgress
-|   │       └─── Customtabs
-|   │       └─── Footer
-|   │       └─── Grid
-|   │       └─── Header
-|   │       └─── InfoArea
-|   │       └─── NavPills
-|   │       └─── Pagination
-|   │       └─── Parallax
-|   │       └─── Snackbar
-|   │       └─── Typography
-│   │       
-│   │    index.js
-│   │       
-│   └─── variables
-│   │
-│   └─── views
-|   │       └─── Components
-|   │       |       └─── Sections
-|   │       └─── Landing
-|   │       |       └─── Sections
-```
+### Testing API
 
 
-## Documentation 
-> how the project is created and structured
+## Overview
+### Documentation 
 
+**Endpoint**
 
-### TODO:
+- `Get api/v1/sender` : returns a message based on a given url
 
-- [x] Create A Landing page
-- [ ] Add Navbar link routing
-- [ ] Create A full 'About Page' ==> allows routing
-- [ ] Create A full 'Events Page' ==> allows routing
-- [ ] Create A full 'Projects Page' ==> allows routing
-- [ ] Create A full 'Projects ->  Educational Page' ==> allows routing
-- [ ] Create A full 'Projects ->  The Constitutio + Code Of Conduct + TASA Docs Page' ==> allows routing
-- [ ] Create A full 'Projects ->  Magazine Page' ==> allows routing
-- [ ] Create A full 'Projects ->  Other Projects Page' ==> allows routing
-- [ ] Create Contact List for Branch, Provincial and National Execs
-- [ ] Contact Us route to all branch, Provincial and National Execs contact information Page
-- [ ] Change 'Register to Login'
-- [ ] Login routes to 'Login Page + Register Page'
-- [ ] Groups Page( For logged in users to converse and share)
-- [ ] Join TASA button routes to Cantact information + allows email sending for inquery
-- [ ] Fix vision + Mission Padding
-- [ ] Fix Gallery Images
-- [ ] Events routes to 'More info for the event' + 'Youtube" + 'Social Media' (Event live streaming)
-- [ ] Video Streaming
-- [ ] Virtual Meeting Rooms
-- [ ] Gallery Blog => allows commenting + posting + sharing + liking + streaming
+- `GET api/v1/listMessages` : displays all messages
 
+- `POST api/v1/createMessage` : creates a message and stores to the server
 
-#### Usage
-
-all responses will be in the form:
-
-```json
-{
-  "data": "Mixed type holding content of the response",
-  "message": "Describes what happened"
-}
-```
-### List All Messages
-**Definations**
-
-- `GET api/v1/listMessages`
-
-- `POST api/v1/createMessage`
-
-- `Delete api/v1/message`
+- `Delete api/v1/deleteMessage` : deletes a message
 
 **Responses**
  - `200 OK` on success
  - `404 Not Found` no such a message or url
- - `204 No content` no data returned
 
 ```json
 {
@@ -149,3 +62,17 @@ all responses will be in the form:
   "url": "Url should be a valid url"
 }
 ```
+
+### TODO:
+
+- [x] create a django project
+- [x] create an app inside django project
+- [x] config setting and & urls
+- [x] create a message model
+- [x] link model to mysql - using makemigrations andmigrate
+- [x] create a message model
+- [x] create api/v1/createMessage
+- [x] create api/v1/listMessages
+- [x] create api/v1/getMessage/<str:sender>
+- [ ] create api/v1/deleteMessage/<str:sender>
+- [x] create endpoint services
