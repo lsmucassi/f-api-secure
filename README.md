@@ -1,6 +1,7 @@
-.[![NPM Version][npm-image]][npm-url]
-.[![Build Status][travis-image]][travis-url]
-.[![Downloads Stats][npm-downloads]][npm-url]
+
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Downloads Stats][npm-downloads]][npm-url]
 
 # PYTHON REST API
 > Implement a simple message board web application. The application should have two services: createMessage
