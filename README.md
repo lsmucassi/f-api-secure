@@ -1,8 +1,10 @@
 # PYTHON REST API
 > Implement a simple message board web application. The application should have two services: createMessage
 and listMessages. The services should be implemented using a protocol (of your choice) running on HTTP.
-CreateMessage receives a message in the request and persists it in the application. The message should have 4
-fields: title, content, sender and url. Url should be a valid url, the others can be arbitrary strings (with limited
+CreateMessage receives a message in the request and persists it in the application.
+
+> The message should have 4 fields: 
+> - title, content, sender and url. Url should be a valid url, the others can be arbitrary strings (with limited
 lengths).
 ListMessages service lists all the messages persisted in the application.
 The service should support two response versions within the same endpoint. The caller is able to define which
