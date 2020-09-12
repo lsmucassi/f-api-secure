@@ -2,21 +2,19 @@
 > Implement a simple message board web application. The application should have two services: createMessage
 and listMessages. The services should be implemented using a protocol (of your choice) running on HTTP.
 
-1. CreateMessage receives a message in the request and persists it in the application.
+> 1. CreateMessage receives a message in the request and persists it in the application.
 
 > The message should have 4 fields: 
 > - title     ---> can be arbitrary strings (with limited lengths)
 > - content   ---> can be arbitrary strings (with limited lengths)
 > - sender    ---> can be arbitrary strings (with limited lengths)
-> - url       ---> Url should be a valid url the others 
+> - url       ---> Url should be a valid url
 
-2. ListMessages service lists all the messages persisted in the application.
-The service should support two response versions within the same endpoint. The caller is able to define which
-response version he can handle.
+> 2. ListMessages service lists all the messages persisted in the application. The service should support two response versions within the same endpoint. The caller is able to define which response version he can handle.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+.[![NPM Version][npm-image]][npm-url]
+.[![Build Status][travis-image]][travis-url]
+.[![Downloads Stats][npm-downloads]][npm-url]
 
 
 ## Documentation 
