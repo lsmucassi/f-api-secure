@@ -1,39 +1,35 @@
+.[![NPM Version][npm-image]][npm-url]
+.[![Build Status][travis-image]][travis-url]
+.[![Downloads Stats][npm-downloads]][npm-url]
+
 # PYTHON REST API
 > Implement a simple message board web application. The application should have two services: createMessage
 and listMessages. The services should be implemented using a protocol (of your choice) running on HTTP.
 
-> 1. CreateMessage receives a message in the request and persists it in the application.
-
-> The message should have 4 fields: 
+> 1. CreateMessage receives a message in the request and persists it in the application. The message should have 4 fields: 
 > - title     ---> can be arbitrary strings (with limited lengths)
 > - content   ---> can be arbitrary strings (with limited lengths)
 > - sender    ---> can be arbitrary strings (with limited lengths)
 > - url       ---> Url should be a valid url
 
 > 2. ListMessages service lists all the messages persisted in the application. The service should support two response versions within the same endpoint. The caller is able to define which response version he can handle.
-.[![NPM Version][npm-image]][npm-url]
-.[![Build Status][travis-image]][travis-url]
-.[![Downloads Stats][npm-downloads]][npm-url]
 
-
-## Documentation 
-- how the project is created and structured
+### Requirements
+ ```  python
+      django
+      django rest framework
+```
 
 ### Setup
 - Clone project to your desired destination 
-- cd to project and install dep
+- cd to project 
+- migrate & runserver
+- start sending queries 
 ```
-cd mytasa
-npm install
+cd f-api-secure
+
 ```
-- run app
-```
-npm start
-```
-(or sudo if you get permission errors: on linux)
-```
-sudo npm start
-```
+
 ### Overview Project Structure
 ```
 .
@@ -90,6 +86,12 @@ sudo npm start
 |   │       └─── Landing
 |   │       |       └─── Sections
 ```
+
+
+## Documentation 
+> how the project is created and structured
+
+
 ### TODO:
 
 - [x] Create A Landing page
