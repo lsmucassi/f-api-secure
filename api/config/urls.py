@@ -21,6 +21,6 @@ urlpatterns = [
     path('', views.index),
     path('api/v1/createMessage', views.add_message),
     path('api/v1/listMessages', views.list_all),
-    path('api/v1/<str:sender>', view.get_message),
+    path('api/v1/getMessage/<str:sender>', views.get_message),
     path('admin/', admin.site.urls),
 ]
