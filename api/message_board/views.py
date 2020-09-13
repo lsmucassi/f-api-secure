@@ -37,13 +37,14 @@ def get_message(request, sender):
 def list_all(request, format=None):
     """
         Return a list of all messages registered on the db
+        Version1
     """
     response = list()
     if request.method == 'GET':
         
             try:
-                messages = Message.objects.all().values('title', 'content', 'sender')  # or simply .values() to get all fields
-                response = list(messages)  # important: convert the QuerySet to a list object
+                messages = Message.objects.all().values('title', 'content', 'sender') 
+                response = list(messages)  # convert the QuerySet to a list object
             except:
                 response = json.dumps([{'Error: [400] - Bad Request'}])
     return JsonResponse(response, safe=False)
@@ -51,13 +52,14 @@ def list_all(request, format=None):
 def list_allV2(request, format=None):
     """
         Return a list of all messages registered on the db
+        Version 2
     """
     response = list()
     if request.method == 'GET':
         
             try:
-                messages = Message.objects.all().values()  # or simply .values() to get all fields
-                response = list(messages)  # important: convert the QuerySet to a list object
+                messages = Message.objects.all().values()  
+                response = list(messages)  
             except:
                 response = json.dumps([{'Error: [404] - Message does not exist'}])
     return JsonResponse(response, safe=False)
