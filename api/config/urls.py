@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from message_board import views
 
+from rest_framework.urlpatterns import format_suffix_patterns
+
 urlpatterns = [
     path('', views.index),
     path('api/v1/createMessage', views.add_message),
@@ -27,3 +29,5 @@ urlpatterns = [
     path('api/v2/getMessage/<str:sender>', views.get_message),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

@@ -6,7 +6,7 @@ from django.http import JsonResponse
 import json
 from message_board.models import Message
 
-def index(request):
+def index(request, format=None):
     """
     landing endpoint with empty response: can be later 
     used for informing a user about the API.
@@ -42,11 +42,26 @@ def list_all(request, format=None):
     if request.method == 'GET':
         
             try:
-                messages = Message.objects.all().values()  # or simply .values() to get all fields
+                messages = Message.objects.all().values('title', 'content', 'sender')  # or simply .values() to get all fields
                 response = list(messages)  # important: convert the QuerySet to a list object
             except:
-                response = json.dumps([{'Error: [404] - Message does not exist'}])
+                response = json.dumps([{'Error: [400] - Bad Request'}])
     return JsonResponse(response, safe=False)
+
+# def list_all(request, format=None):
+#     """
+#         Return a list of all messages registered on the db
+#     """
+#     response = list()
+#     if request.method == 'GET':
+        
+#             try:
+#                 messages = Message.objects.all().values()  # or simply .values() to get all fields
+#                 response = list(messages)  # important: convert the QuerySet to a list object
+#             except:
+#                 response = json.dumps([{'Error: [404] - Message does not exist'}])
+#     return JsonResponse(response, safe=False)
+
 
 @csrf_exempt
 def add_message(request):
