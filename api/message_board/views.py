@@ -48,19 +48,19 @@ def list_all(request, format=None):
                 response = json.dumps([{'Error: [400] - Bad Request'}])
     return JsonResponse(response, safe=False)
 
-# def list_all(request, format=None):
-#     """
-#         Return a list of all messages registered on the db
-#     """
-#     response = list()
-#     if request.method == 'GET':
+def list_allV2(request, format=None):
+    """
+        Return a list of all messages registered on the db
+    """
+    response = list()
+    if request.method == 'GET':
         
-#             try:
-#                 messages = Message.objects.all().values()  # or simply .values() to get all fields
-#                 response = list(messages)  # important: convert the QuerySet to a list object
-#             except:
-#                 response = json.dumps([{'Error: [404] - Message does not exist'}])
-#     return JsonResponse(response, safe=False)
+            try:
+                messages = Message.objects.all().values()  # or simply .values() to get all fields
+                response = list(messages)  # important: convert the QuerySet to a list object
+            except:
+                response = json.dumps([{'Error: [404] - Message does not exist'}])
+    return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
