@@ -16,6 +16,7 @@ python
 django
 django rest framework
 ```
+> *NOTE : The validators_collection module recognizes the pattern https://, ftp://  etc. for validating the URL and .com, .in, .something at the end of the URL.
 
 ### Setup
 - Clone project to your desired destination 
@@ -101,5 +102,4 @@ e.g http://128.0.0.1:8000/api/createMessage
 - [x] create api/listMessages:version=#
 - [x] create api/listMessages:version=#-content_type
 - [x] create api/getMessage/<str:sender>
-
-
+- [x] validate url

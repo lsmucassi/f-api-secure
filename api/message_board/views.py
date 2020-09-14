@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-
+from validator_collection import validators, checkers, errors
 import json
 from message_board.models import Message
 
@@ -105,16 +105,35 @@ def add_message(request):
         content = payload['content']
         sender = payload['sender']
         url = payload['url']
-        message = Message(title=title, content=content, sender=sender, url=url)
-        try:
-            message.save()
-            response = json.dumps([{
-                'Success': '[200] - Message Sent',
-                'title:': title,
-                'content:': content,
-                'sender:': sender,
-                'url:': url}])
-        except:
-            response = json.dumps([{'Error': 'Message could not be saved'}])
-    return HttpResponse(response, content_type='text/json')
 
+        if not url:
+            try:
+                response = json.dumps([{'Error:': '1 [400] - url must be a valid url!'}])
+                return HttpResponse(response, content_type='text/json')
+            except:
+                response = json.dumps([{'Error:':'2 [400] - Error with URL Field '}])
+                return HttpResponse(response, content_type='text/json')
+        elif url:
+            valid = checkers.is_url(url)
+            if valid == True:
+                message = Message(title=title, content=content, sender=sender, url=url)
+                try:
+                    message.save()
+                    response = json.dumps([{
+                        'Success': '[200] - Message Sent',
+                        'title:': title,
+                        'content:': content,
+                        'sender:': sender,
+                        'url:': url}])
+                    return HttpResponse(response, content_type='text/json')
+                except:
+                    response = json.dumps([{'Error': 'Message could not be saved'}])
+                    return HttpResponse(response, content_type='text/json')
+            else:
+                try:
+                    response = json.dumps([{'Error:': '3 [400] - url must be a valid url!'}])
+                    return HttpResponse(response, content_type='text/json')
+                except:
+                    response = json.dumps([{'Error:':'4 [400] - Error with URL Field '}])
+                    return HttpResponse(response, content_type='text/json')
+                
