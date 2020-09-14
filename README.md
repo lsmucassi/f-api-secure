@@ -35,6 +35,25 @@ $> python manage.py migrate
 $> python manage.py runserver
 ```
 ### Testing API
+> after running the server:
+```
+use the browser or postman or any Http / API testing tool, default host is on local host port 8000
+- api/getMessage/sender
+: retrieves a single message matching the string passed as a query to the url
+e.g http://128.0.0.1:8000/api/getMessage/Mr Secure
+
+- api/listMessages
+: displays all messages based on the query passed to the url
+e.g
+    - http://128.0.0.1:8000/api/listMessages - lists all without urls
+    - http://128.0.0.1:8000/api/listMessages:version=2-json - returns all messages with urls in json form
+    - http://128.0.0.1:8000/api/listMessages:version=2-xml - returns all messages in xml form
+
+
+- `GET api/listMessages:version=#-content_type` : displays all messages
+
+- `POST api/createMessage` : creates a message and stores to the server
+```
 
 
 ## Overview
@@ -42,13 +61,13 @@ $> python manage.py runserver
 
 **Endpoint**
 
-- `Get api/v1/sender` : returns a message based on a given url
+- `Get api/sender` : returns a message based on a given url
 
-- `GET api/v1/listMessages` : displays all messages
+- `GET api/listMessages` : displays all messages
 
-- `POST api/v1/createMessage` : creates a message and stores to the server
+- `GET api/listMessages:version=#-content_type` : displays all messages
 
-- `Delete api/v1/deleteMessage` : deletes a message
+- `POST api/createMessage` : creates a message and stores to the server
 
 **Responses**
  - `200 OK` on success
@@ -72,10 +91,9 @@ $> python manage.py runserver
 - [x] link model to mysql - using makemigrations and migrate
 - [x] create a message model
 - [x] create endpoint services
-- [x] create api/v1/createMessage
-- [x] create api/v1/listMessages
-- [ ] create api/v1/getMessage/<str:sender>
-- [ ] create api/v2/listMessages
-- [ ] create api/v2/getMessage/<str:sender>
+- [x] create api/createMessage
+- [x] create api/listMessages
+- [x] create api/listMessages:version=#-content_type
+- [x] create api/getMessage/<str:sender>
 
 
