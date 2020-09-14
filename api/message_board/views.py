@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
@@ -41,7 +42,7 @@ def list_all(request, format=None):
     """
     response = list()
     if request.method == 'GET':
-        
+
             try:
                 messages = Message.objects.all().values('title', 'content', 'sender') 
                 response = list(messages)  # convert the QuerySet to a list object
@@ -49,20 +50,28 @@ def list_all(request, format=None):
                 response = json.dumps([{'Error: [400] - Bad Request'}])
     return JsonResponse(response, safe=False)
 
-def list_allV2(request, format=None):
+def list_allV2(request, version, num, cont_type, format=None):
     """
         Return a list of all messages registered on the db
         Version 2
     """
-    response = list()
     if request.method == 'GET':
-        
-            try:
-                messages = Message.objects.all().values()  
-                response = list(messages)  
-            except:
-                response = json.dumps([{'Error: [404] - Message does not exist'}])
-    return HttpResponse(response, content_type='application/json')
+        try:
+            # messages = Message.objects.all().values()  
+            # response = list(messages)
+            print(version)
+            print(cont_type)
+            print(num)
+            data = serializers.serialize("json", Message.objects.all())
+        except:
+            response = json.dumps([{'Error: [404] - Message does not exist'}])
+    return HttpResponse(data, content_type='application/json')
+    #     elif content == 'xml':
+    #         try:
+    #             data = serializers.serialize("xml", Message.objects.all())
+    #         except:
+    #             response = json.dumps([{'Error: [404] - Message does not exist'}])
+    # return HttpResponse(data, content_type='application/xml')    
 
 
 @csrf_exempt

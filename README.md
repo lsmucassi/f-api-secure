@@ -75,9 +75,7 @@ $> python manage.py runserver
 - [x] create api/v1/createMessage
 - [x] create api/v1/listMessages
 - [ ] create api/v1/getMessage/<str:sender>
-- [ ] create api/v1/deleteMessage/<str:sender>
-- [ ] create api/v2/createMessage
 - [ ] create api/v2/listMessages
 - [ ] create api/v2/getMessage/<str:sender>
-- [ ] create api/v2/deleteMessage/<str:sender>
+
 

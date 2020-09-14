@@ -21,10 +21,10 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('', views.index),
-    path('api/v1/createMessage', views.add_message),
-    path('api/v1/listMessages', views.list_all),
-    path('api/v1/getMessage/<str:sender>', views.get_message),
-    path('api/v2/listMessages', views.list_allV2),
+    path('api/createMessage', views.add_message),
+    path('api/listMessages', views.list_all),
+    path('api/getMessage/<str:sender>', views.get_message),
+    path('api/listMessages<slug:ver>=<int:num>-<str:cont_type>', views.list_allV2),
     path('admin/', admin.site.urls),
 ]
 
