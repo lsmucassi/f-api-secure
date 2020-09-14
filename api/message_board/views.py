@@ -62,7 +62,7 @@ def list_allV2(request, format=None):
                 response = list(messages)  
             except:
                 response = json.dumps([{'Error: [404] - Message does not exist'}])
-    return JsonResponse(response, safe=False)
+    return HttpResponse(response, content_type='application/json')
 
 
 @csrf_exempt
