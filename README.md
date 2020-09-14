@@ -38,6 +38,7 @@ $> python manage.py runserver
 > after running the server:
 ```
 use the browser or postman or any Http / API testing tool, default host is on local host port 8000
+
 - api/getMessage/sender
 : retrieves a single message matching the string passed as a query to the url
 e.g http://128.0.0.1:8000/api/getMessage/Mr Secure
@@ -49,15 +50,15 @@ e.g
     - http://128.0.0.1:8000/api/listMessages:version=2-json - returns all messages with urls in json form
     - http://128.0.0.1:8000/api/listMessages:version=2-xml - returns all messages in xml form
 
-
-- `GET api/listMessages:version=#-content_type` : displays all messages
-
-- `POST api/createMessage` : creates a message and stores to the server
+- api/createMessage
+: creates a message and stores to the db
+e.g http://128.0.0.1:8000/api/createMessage
+    - populate all 4 required fields
 ```
 
 
 ## Overview
-### Documentation 
+### Documentation   
 
 **Endpoint**
 
