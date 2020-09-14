@@ -13,6 +13,8 @@ and listMessages. The services should be implemented using a protocol (of your c
 ### Requirements
 ``` 
 view requirements file in project
+or
+run pip -r requirements.txt
 ```
 > *NOTE : The validators_collection module recognizes the pattern https://, ftp://  etc. for validating the URL and .com, .in, .something at the end of the URL.
 
