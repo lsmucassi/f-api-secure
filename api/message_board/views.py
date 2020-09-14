@@ -58,7 +58,14 @@ def list_all(request, version='ver', num=1, cont_type='', format=None):
             except:
                 response = json.dumps([{'Error:':' [400](version one should not begiven return type) - Message does not exist'}])
                 return HttpResponse(response, content_type='text/json')
-        elif num == 2 and cont_type == '' or cont_type == 'json': # version two with return type of json
+        elif num == 2: # version two with return type of json
+            try:
+                response = serializers.serialize("json", Message.objects.all())
+                return HttpResponse(response, content_type='text/json')
+            except:
+                response = json.dumps([{'Error: [400] - Messages Not Found'}])
+                return HttpResponse(response, content_type='text/json')
+        elif num == 2 and (cont_type == '' or cont_type == 'json'): # version two with return type of json
             try:
                 response = serializers.serialize("json", Message.objects.all())
                 return HttpResponse(response, content_type='text/json')

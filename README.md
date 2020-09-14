@@ -47,6 +47,7 @@ e.g http://128.0.0.1:8000/api/getMessage/Mr Secure
 : displays all messages based on the query passed to the url
 e.g
     - http://128.0.0.1:8000/api/listMessages - lists all without urls
+    - http://128.0.0.1:8000/api/listMessages:version=2 - default version 2 returns all messages with urls in json form
     - http://128.0.0.1:8000/api/listMessages:version=2-json - returns all messages with urls in json form
     - http://128.0.0.1:8000/api/listMessages:version=2-xml - returns all messages in xml form
 
@@ -62,17 +63,20 @@ e.g http://128.0.0.1:8000/api/createMessage
 
 **Endpoint**
 
-- `Get api/sender` : returns a message based on a given url
+- `Get api/getMessage/sender` : returns a message based on a given url
 
 - `GET api/listMessages` : displays all messages
 
-- `GET api/listMessages:version=#-content_type` : displays all messages
+- `GET api/listMessages:version=#` : default version 2 displays all messages
+
+- `GET api/listMessages:version=#-content_type` : version two displays all messages based on type passed
 
 - `POST api/createMessage` : creates a message and stores to the server
 
 **Responses**
- - `200 OK` on success
- - `404 Not Found` no such a message or url
+ - `200 OK` - on success
+ - `404 Not Found` - Message Not Found
+ - `404 Not Found` - Bad Request, encountered an error
 
 ```json
 {

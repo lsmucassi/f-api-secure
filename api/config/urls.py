@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/createMessage', views.add_message),
     path('api/listMessages', views.list_all),
     path('api/listMessages:<slug:version>=<int:num>-<str:cont_type>', views.list_all),
+    path('api/listMessages:<slug:version>=<int:num>', views.list_all),
     path('api/getMessage/<str:sender>', views.get_message),
     path('admin/', admin.site.urls),
 ]
