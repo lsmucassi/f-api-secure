@@ -32,47 +32,47 @@ def get_message(request, sender):
                 'url': message.url
             }])
         except:
-            response = json.dumps([{'Error: [404] - Message does not exist'}])
+            response = json.dumps([{'Error:': '[404] - Message does not exist'}])
     return HttpResponse(response, content_type='text/json')
 
-def list_all(request, format=None):
-    """
-        Return a list of all messages registered on the db
-        Version1
-    """
-    response = list()
-    if request.method == 'GET':
 
-            try:
-                messages = Message.objects.all().values('title', 'content', 'sender') 
-                response = list(messages)  # convert the QuerySet to a list object
-            except:
-                response = json.dumps([{'Error: [400] - Bad Request'}])
-    return JsonResponse(response, safe=False)
-
-def list_allV2(request, version, num, cont_type, format=None):
+def list_all(request, version='ver', num=1, cont_type='', format=None):
     """
         Return a list of all messages registered on the db
         Version 2
     """
+    response = list()
     if request.method == 'GET':
-        try:
-            # messages = Message.objects.all().values()  
-            # response = list(messages)
-            print(version)
-            print(cont_type)
-            print(num)
-            data = serializers.serialize("json", Message.objects.all())
-        except:
-            response = json.dumps([{'Error: [404] - Message does not exist'}])
-    return HttpResponse(data, content_type='application/json')
-    #     elif content == 'xml':
-    #         try:
-    #             data = serializers.serialize("xml", Message.objects.all())
-    #         except:
-    #             response = json.dumps([{'Error: [404] - Message does not exist'}])
-    # return HttpResponse(data, content_type='application/xml')    
-
+        if num == 1 and cont_type == '': # default return for version one
+            try:
+                messages = Message.objects.all().values('title', 'content', 'sender') 
+                response = list(messages)  # convert the QuerySet to a list object
+                return JsonResponse(response, safe=False)
+            except:
+                response = json.dumps([{'Error:': ' [404] - Messages Not Found'}])
+                return HttpResponse(response, content_type='text/json')
+        elif num == 1 and (cont_type == 'json' or cont_type == 'xml'): # error when passing a return type to version one
+            try:
+                response = json.dumps([{'Error:': ' [400] - Bad Request: version one can not take a version & return type!'}])
+                return HttpResponse(response, content_type='text/json')
+            except:
+                response = json.dumps([{'Error:':' [404](version one should not begiven return type) - Message does not exist'}])
+                return HttpResponse(response, content_type='text/json')
+        elif num == 2 and cont_type == '' or cont_type == 'json': # version two with return type of json
+            try:
+                response = serializers.serialize("json", Message.objects.all())
+                return HttpResponse(response, content_type='text/json')
+            except:
+                response = json.dumps([{'Error: [404] - Messages Not Found'}])
+                return HttpResponse(response, content_type='text/json')
+        elif num == 2 and cont_type == 'xml': # version two with return type of xml
+                try:
+                    response = serializers.serialize("xml", Message.objects.all())
+                    return HttpResponse(response, content_type='text/xml')
+                except:
+                    response = json.dumps([{'Error: [404] - Messages Not Found'}])
+                    return HttpResponse(response, content_type='text/json')
+    
 
 @csrf_exempt
 def add_message(request):
