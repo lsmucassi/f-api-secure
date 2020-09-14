@@ -101,7 +101,12 @@ def add_message(request):
         message = Message(title=title, content=content, sender=sender, url=url)
         try:
             message.save()
-            response = json.dumps([{'Success': '[200] - Message Sent'}])
+            response = json.dumps([{
+                'Success': '[200] - Message Sent',
+                'title:': title,
+                'content:': content,
+                'sender:': sender,
+                'url:': url}])
         except:
             response = json.dumps([{'Error': 'Message could not be saved'}])
     return HttpResponse(response, content_type='text/json')
