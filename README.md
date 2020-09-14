@@ -12,29 +12,33 @@ and listMessages. The services should be implemented using a protocol (of your c
 
 ### Requirements
 ``` 
-python
-django
-django rest framework
+view requirements file in project
 ```
 > *NOTE : The validators_collection module recognizes the pattern https://, ftp://  etc. for validating the URL and .com, .in, .something at the end of the URL.
 
 ### Setup
-- Clone project to your desired destination 
+- Clone/download project to your desired destination 
+- cd to cloned project
+- cd to 'api' directory( if you are on linux or mac run 'startup.sh' file)
+  ``` ./startup.sh ```
+- open local host displayed on output from running script or python manage.py runserver
+- start testing
+
+or 
+
+> skip if you ran the startup file
+- Clone/download project to your desired destination 
 - cd to cloned project
 - create virtual env & activate env (optional)
-- cd to main project (to directory with manage.py)
+- cd to main project('api folder') 
 - make migrations
+  ``` run python manage.py makemigrations ```
 - migrate & runserver
-- start sending queries 
-```
-$> cd f-api-secure
-$> python -m venv env
-$> source env/bin/activate
-$> cd api
-$> python manage.py makemigrations
-$> python manage.py migrate
-$> python manage.py runserver
-```
+  ``` run python manage.py migrate ```
+- run server
+  ``` run python manage.py runserver ```
+- start testing queries 
+
 ### Testing API
 > after running the server:
 ```
