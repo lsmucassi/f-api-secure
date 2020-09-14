@@ -39,7 +39,7 @@ def get_message(request, sender):
 def list_all(request, version='ver', num=1, cont_type='', format=None):
     """
         Return a list of all messages registered on the db
-        Version 2
+        filteres according to url query parameter 
     """
     response = list()
     if request.method == 'GET':
@@ -53,25 +53,32 @@ def list_all(request, version='ver', num=1, cont_type='', format=None):
                 return HttpResponse(response, content_type='text/json')
         elif num == 1 and (cont_type == 'json' or cont_type == 'xml'): # error when passing a return type to version one
             try:
-                response = json.dumps([{'Error:': ' [400] - Bad Request: version one can not take a version & return type!'}])
+                response = json.dumps([{'Error:': ' [404] - Bad Request: version one can not take a version & return type!'}])
                 return HttpResponse(response, content_type='text/json')
             except:
-                response = json.dumps([{'Error:':' [404](version one should not begiven return type) - Message does not exist'}])
+                response = json.dumps([{'Error:':' [400](version one should not begiven return type) - Message does not exist'}])
                 return HttpResponse(response, content_type='text/json')
         elif num == 2 and cont_type == '' or cont_type == 'json': # version two with return type of json
             try:
                 response = serializers.serialize("json", Message.objects.all())
                 return HttpResponse(response, content_type='text/json')
             except:
-                response = json.dumps([{'Error: [404] - Messages Not Found'}])
+                response = json.dumps([{'Error: [400] - Messages Not Found'}])
                 return HttpResponse(response, content_type='text/json')
         elif num == 2 and cont_type == 'xml': # version two with return type of xml
                 try:
                     response = serializers.serialize("xml", Message.objects.all())
                     return HttpResponse(response, content_type='text/xml')
                 except:
-                    response = json.dumps([{'Error: [404] - Messages Not Found'}])
+                    response = json.dumps([{'Error: [400] - Messages Not Found'}])
                     return HttpResponse(response, content_type='text/json')
+        else: # if the url is not registered with the app 
+            try:
+                response = json.dumps([{'Error:': ' [400] - Not Found: URL DOES NOT EXIST!'}])
+                return HttpResponse(response, content_type='text/json')
+            except:
+                response = json.dumps([{'Error:':' [400] - Error with URL '}])
+                return HttpResponse(response, content_type='text/json')
     
 
 @csrf_exempt
