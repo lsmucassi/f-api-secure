@@ -98,6 +98,7 @@ e.g http://128.0.0.1:8000/api/createMessage
 - [x] create endpoint services
 - [x] create api/createMessage
 - [x] create api/listMessages
+- [x] create api/listMessages:version=#
 - [x] create api/listMessages:version=#-content_type
 - [x] create api/getMessage/<str:sender>
 
