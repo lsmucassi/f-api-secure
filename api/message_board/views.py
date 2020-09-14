@@ -15,7 +15,7 @@ def index(request, format=None):
     i.e locahost:8000 ---> return [{}]
     """
     response = json.dumps([{}])
-    return HttpResponse(response, content_type='text/json')
+    return HttpResponse(response, content_type='application/json')
 
 def get_message(request, sender):
     """
@@ -33,7 +33,7 @@ def get_message(request, sender):
             }])
         except:
             response = json.dumps([{'Error:': '[404] - Message does not exist'}])
-    return HttpResponse(response, content_type='text/json')
+    return HttpResponse(response, content_type='application/json')
 
 
 def list_all(request, version='ver', num=1, cont_type='', format=None):
@@ -50,42 +50,35 @@ def list_all(request, version='ver', num=1, cont_type='', format=None):
                 return JsonResponse(response, safe=False)
             except:
                 response = json.dumps([{'Error:': ' [404] - Messages Not Found'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
         elif num == 1 and (cont_type == 'json' or cont_type == 'xml'): # error when passing a return type to version one
             try:
                 response = json.dumps([{'Error:': ' [404] - Bad Request: version one can not take a version & return type!'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
             except:
                 response = json.dumps([{'Error:':' [400](version one should not begiven return type) - Message does not exist'}])
-                return HttpResponse(response, content_type='text/json')
-        elif num == 2: # version two with return type of json
-            try:
-                response = serializers.serialize("json", Message.objects.all())
-                return HttpResponse(response, content_type='text/json')
-            except:
-                response = json.dumps([{'Error: [400] - Messages Not Found'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
         elif num == 2 and (cont_type == '' or cont_type == 'json'): # version two with return type of json
             try:
                 response = serializers.serialize("json", Message.objects.all())
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
             except:
                 response = json.dumps([{'Error: [400] - Messages Not Found'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
         elif num == 2 and cont_type == 'xml': # version two with return type of xml
                 try:
                     response = serializers.serialize("xml", Message.objects.all())
-                    return HttpResponse(response, content_type='text/xml')
+                    return HttpResponse(response, content_type='application/xml')
                 except:
                     response = json.dumps([{'Error: [400] - Messages Not Found'}])
-                    return HttpResponse(response, content_type='text/json')
+                    return HttpResponse(response, content_type='application/json')
         else: # if the url is not registered with the app 
             try:
                 response = json.dumps([{'Error:': ' [400] - Not Found: URL DOES NOT EXIST!'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
             except:
                 response = json.dumps([{'Error:':' [400] - Error with URL '}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
     
 
 @csrf_exempt
@@ -109,10 +102,10 @@ def add_message(request):
         if not url:
             try:
                 response = json.dumps([{'Error:': '1 [400] - url must be a valid url!'}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
             except:
                 response = json.dumps([{'Error:':'2 [400] - Error with URL Field '}])
-                return HttpResponse(response, content_type='text/json')
+                return HttpResponse(response, content_type='application/json')
         elif url:
             valid = checkers.is_url(url)
             if valid == True:
@@ -128,12 +121,12 @@ def add_message(request):
                     return HttpResponse(response, content_type='text/json')
                 except:
                     response = json.dumps([{'Error': 'Message could not be saved'}])
-                    return HttpResponse(response, content_type='text/json')
+                    return HttpResponse(response, content_type='application/json')
             else:
                 try:
                     response = json.dumps([{'Error:': '3 [400] - url must be a valid url!'}])
-                    return HttpResponse(response, content_type='text/json')
+                    return HttpResponse(response, content_type='application/json')
                 except:
                     response = json.dumps([{'Error:':'4 [400] - Error with URL Field '}])
-                    return HttpResponse(response, content_type='text/json')
+                    return HttpResponse(response, content_type='application/json')
                 
